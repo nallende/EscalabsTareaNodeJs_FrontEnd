@@ -6,10 +6,10 @@ const TopNav = () => (
       Home
     </Link>
     <Link className="nav-link" to="/login">
-      Login
+      Ingreso
     </Link>
     <Link className="nav-link" to="/register">
-      Register
+      Registro
     </Link>
   </div>
 );

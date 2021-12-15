@@ -1,7 +1,8 @@
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Home from "./booking/Home";
 import Login from "./auth/Login";
-import Register from "./auth/Register";
+import Registro from "./auth/Registro";
+import './auth/registro.css';
 import TopNav from './components/TopNav'
 
 function App() {
@@ -11,7 +12,7 @@ function App() {
         <Route exact path = "/"
         component = { Home }/> 
         <Route exact path = "/login"component = { Login }/> 
-        <Route exact path = "/register" component = { Register }/> 
+        <Route exact path = "/register" component = { Registro }/> 
         </Switch > 
         </BrowserRouter>
     );
