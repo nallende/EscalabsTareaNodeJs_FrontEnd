@@ -1,12 +1,10 @@
 import React, {useState} from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import axios from 'axios';
+import axios from "axios";
 
 
-const res = await axios.post('http://localhost:3000/api/register', {
-	nombre,email, password
-})
 
+ 
 
 const Registro = () => {
 	const [registroEnviado, cambiarRegistroEnviado] = useState(false);
@@ -19,6 +17,7 @@ const Registro = () => {
 					password: ''
 									}}
 
+									
 				validate={(valores) => {
 					let errores = {};
 
@@ -36,7 +35,7 @@ const Registro = () => {
 						errores.email = 'El email solo puede contener letras, numeros, puntos, guiones y guion bajo.'
 					}
 
-               // Validacion Password
+                   // Validacion Password
 					if(!valores.password){
 						errores.password = 'Por favor ingresa una Clave debe tener entre 4 y 8 dígitos e incluir al menos un dígito numérico '
 					} else if(!/^(?=.*\d).{4,8}$/.test(valores.password)){
@@ -49,9 +48,11 @@ const Registro = () => {
 				}}
 				onSubmit={(valores, {resetForm}) => {
 					resetForm();
+				    axios.post(`http://localhost:8000/api/register`,{valores})
 					console.log('Registro enviado');
 					cambiarRegistroEnviado(true);
 					setTimeout(() => cambiarRegistroEnviado(false), 5000);
+					console.log(valores)
 				}}
 			>
 				{( {errors} ) => (
@@ -112,7 +113,7 @@ const Registro = () => {
 						{registroEnviado && <p className="exito">Registro enviado con exito!</p>}
 					</Form>
 				)}
-
+	
 			</Formik>
 		</>
 	);
