@@ -1,6 +1,11 @@
 import React, {useState} from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import axios from 'axios';
 
+
+const res = await axios.post('http://localhost:3000/api/register', {
+	nombre,email, password
+})
 
 
 const Registro = () => {
@@ -10,8 +15,10 @@ const Registro = () => {
 			<Formik
 				initialValues={{
 					nombre: '',
-					correo: ''
-				}}
+					email: '',
+					password: ''
+									}}
+
 				validate={(valores) => {
 					let errores = {};
 
@@ -22,18 +29,18 @@ const Registro = () => {
 						errores.nombre = 'El nombre solo puede contener letras y espacios'
 					}
 
-					// Validacion correo
-					if(!valores.correo){
-						errores.correo = 'Por favor ingresa un correo electronico'
-					} else if(!/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(valores.correo)){
-						errores.correo = 'El correo solo puede contener letras, numeros, puntos, guiones y guion bajo.'
+					// Validacion email
+					if(!valores.email){
+						errores.email = 'Por favor ingresa un email valido'
+					} else if(!/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(valores.email)){
+						errores.email = 'El email solo puede contener letras, numeros, puntos, guiones y guion bajo.'
 					}
 
                // Validacion Password
 					if(!valores.password){
-						errores.password = 'Por favor ingresa un correo electronico'
-					} else if(!/^(?=.*\d).{4,8}$/.test(valores.pasword)){
-						errores.correo = 'La contraseña debe tener entre 4 y 8 dígitos e incluir al menos un dígito numérico.'
+						errores.password = 'Por favor ingresa una Clave debe tener entre 4 y 8 dígitos e incluir al menos un dígito numérico '
+					} else if(!/^(?=.*\d).{4,8}$/.test(valores.password)){
+						errores.password = 'La contraseña debe tener entre 4 y 8 dígitos e incluir al menos un dígito numérico.'
 					}
 
 
@@ -42,15 +49,15 @@ const Registro = () => {
 				}}
 				onSubmit={(valores, {resetForm}) => {
 					resetForm();
-					console.log('Fegistro enviado');
+					console.log('Registro enviado');
 					cambiarRegistroEnviado(true);
 					setTimeout(() => cambiarRegistroEnviado(false), 5000);
 				}}
 			>
 				{( {errors} ) => (
 					<Form className="registro">
-						<div>
-							<label htmlFor="nombre">Nombre</label>
+						<div className="input-group mb-3">
+							<label htmlFor="nombre" class="form-label">Nombre</label>
 							<Field
 								type="text" 
 								id="nombre" 
@@ -59,18 +66,18 @@ const Registro = () => {
 							/>
 							<ErrorMessage name="nombre" component={() => (<div className="error">{errors.nombre}</div>)} />
 						</div>
-						<div>
-							<label htmlFor="correo">Correo</label>
+						<div className="input-group mb-3">
+							<label htmlFor="email"class="form-label">email</label>
 							<Field
 								type="text" 
-								id="correo" 
-								name="correo" 
-								placeholder="correo@correo.com" 
+								id="email" 
+								name="email" 
+								placeholder="email@email.com" 
 							/>
-							<ErrorMessage name="correo" component={() => (<div className="error">{errors.correo}</div>)} />
+							<ErrorMessage name="email" component={() => (<div className="error">{errors.email}</div>)} />
 						</div>
-                  <div>
-							<label htmlFor="password">Clave</label>
+						<div className="input-group mb-3">
+							<label htmlFor="password" class="form-label">Clave</label>
 							<Field
 								type="password" 
 								id="password" 
@@ -82,7 +89,7 @@ const Registro = () => {
 
 						<div>
 							<Field name="pais" as="select">
-								<option value="mexico">Mexico</option>
+								<option value="Chile">Chile</option>
 								<option value="España">España</option>
 								<option value="Argentina">Argentina</option>
 							</Field>
@@ -90,10 +97,10 @@ const Registro = () => {
 
 						<div>
 							<label>
-								<Field type="radio" name="sexo" value="hombre" /> Hombre
+								<Field type="radio" name="oficio" value="oficio" /> Oficio
 							</label>
 							<label>
-								<Field type="radio" name="sexo" value="mujer" /> Mujer
+								<Field type="radio" name="propietario" value="propietario" /> Propietario
 							</label>
 						</div>
 
@@ -101,7 +108,7 @@ const Registro = () => {
 							<Field name="mensaje" as="textarea" placeholder="Mensaje" />
 						</div>
 
-						<button type="submit">Enviar</button>
+						<button type="submit" class="btn btn-primary">Enviar</button>
 						{registroEnviado && <p className="exito">Registro enviado con exito!</p>}
 					</Form>
 				)}
