@@ -48,7 +48,7 @@ const Registro = () => {
 				}}
 				onSubmit={(valores, {resetForm}) => {
 					resetForm();
-				    axios.post(`http://localhost:8000/api/register`,{valores})
+				    axios.post(`${process.env.REACT_APP_API}/register`,{...valores})
 					console.log('Registro enviado');
 					cambiarRegistroEnviado(true);
 					setTimeout(() => cambiarRegistroEnviado(false), 5000);
