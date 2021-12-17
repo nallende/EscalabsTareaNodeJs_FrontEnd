@@ -3,9 +3,6 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import axios from "axios";
 
 
-
- 
-
 const Registro = () => {
 	const [registroEnviado, cambiarRegistroEnviado] = useState(false);
 	return (
@@ -42,10 +39,10 @@ const Registro = () => {
 						errores.password = 'La contraseña debe tener entre 4 y 8 dígitos e incluir al menos un dígito numérico.'
 					}
 
-
-
-					return errores;
+			return errores;
 				}}
+
+
 				onSubmit={(valores, {resetForm}) => {
 					resetForm();
 				    axios.post(`${process.env.REACT_APP_API}/register`,{...valores})
@@ -63,7 +60,7 @@ const Registro = () => {
 								type="text" 
 								id="nombre" 
 								name="nombre" 
-								placeholder="escriba su nombre"
+								placeholder="Nombre y Apellido"
 							/>
 							<ErrorMessage name="nombre" component={() => (<div className="error">{errors.nombre}</div>)} />
 						</div>
@@ -83,7 +80,7 @@ const Registro = () => {
 								type="password" 
 								id="password" 
 								name="password" 
-								placeholder="su clave" 
+								placeholder="ingrese una clave" 
 							/>
 							<ErrorMessage name="password" component={() => (<div className="error">{errors.password}</div>)} />
 						</div>
@@ -91,23 +88,22 @@ const Registro = () => {
 						<div>
 							<Field name="pais" as="select">
 								<option value="Chile">Chile</option>
-								<option value="España">España</option>
+								<option value="Peru">Perú</option>
 								<option value="Argentina">Argentina</option>
 							</Field>
 						</div>
 
+
 						<div>
 							<label>
-								<Field type="radio" name="oficio" value="oficio" /> Oficio
+								<Field type="radio" name="oficio" value="oficio" /> profesional
 							</label>
 							<label>
-								<Field type="radio" name="propietario" value="propietario" /> Propietario
+								<Field type="radio" name="propietario" value="propietario" /> propietario
 							</label>
 						</div>
 
-						<div>
-							<Field name="mensaje" as="textarea" placeholder="Mensaje" />
-						</div>
+						
 
 						<button type="submit" class="btn btn-primary">Enviar</button>
 						{registroEnviado && <p className="exito">Registro enviado con exito!</p>}
