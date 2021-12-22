@@ -12,23 +12,23 @@ export const Login = () => {
       password: ''
     },
     validationSchema: Yup.object({
-      login: Yup.string().email().max(40, 'Correo Login debe ser menor a 40 caracteres').required('Required'),
-      password: Yup.string()
-      .required("Por Favor Ingrese Clave")
-      .min(4, "Clave muy Corta")
-      .max(8, "Excede Maximo Caracteres")
+      login: Yup.string().email().max(40, 'Correo Login debe ser menor a 40 caracteres').required('Required').strict(true),
+      password: Yup.string().strict(true)
+      .required("Por Favor Ingrese Clave").strict(true)
+      .min(4, "Clave muy Corta").strict(true)
+      .max(8, "Excede Maximo Caracteres").strict(true)
       .test("isValidPass", " is not valid", (value, context) => {
-        const hasUpperCase = /[A-Z]/.test(value);
-        const hasLowerCase = /[a-z]/.test(value);
-        const hasNumber = /[0-9]/.test(value);
-        const hasSymbole = /[!@#%&]/.test(value);
-        let validConditions = 0;
-        const numberOfMustBeValidConditions = 3;
-        const conditions = [hasLowerCase, hasUpperCase, hasNumber, hasSymbole];
+        const tieneMayuscula = /[A-Z]/.test(value);
+        const tieneMiuscula = /[a-z]/.test(value);
+        const tieneNumero = /[0-9]/.test(value);
+        const tieneSimbolo = /[!@#%&]/.test(value);
+        let condicionesValidas = 0;
+        const numerValidaciones = 3;
+        const conditions = [tieneMiuscula, tieneMayuscula, tieneNumero, tieneSimbolo];
         conditions.forEach((condition) =>
-          condition ? validConditions++ : null
+          condition ? condicionesValidas++ : null
         );
-        if (validConditions >= numberOfMustBeValidConditions) {
+        if (condicionesValidas >= numerValidaciones) {
           return true;
         }
         return false;
