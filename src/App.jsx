@@ -1,8 +1,8 @@
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Home from "./booking/Home";
-import Login from "./auth/Login";
-import Registro from "./auth/Registro";
-import './auth/registro.css';
+import Login from "./components/Login";
+import Registro from "./components/Registro";
+import './components/registro.css';
 import TopNav from './components/TopNav'
 
 function App() {

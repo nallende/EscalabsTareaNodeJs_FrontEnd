@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import axios from "axios";
+import {register} from "../actions/auth";
 
 
 const Registro = () => {
@@ -35,7 +36,7 @@ const Registro = () => {
                    // Validacion Password
 					if(!valores.password){
 						errores.password = 'Por favor ingresa una Clave debe tener entre 4 y 8 dígitos e incluir al menos un dígito numérico '
-					} else if(!/^(?=.*\d).{4,8}$/.test(valores.password)){
+					} else if(!/^[A-Z],[a-z],[!@#%&],(?=.*\d).{4,8}$/.test(valores.password)){
 						errores.password = 'La contraseña debe tener entre 4 y 8 dígitos e incluir al menos un dígito numérico.'
 					}
 
